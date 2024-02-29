@@ -1,6 +1,6 @@
 ## 1. 빵야빵야
 <div align="center">
-  <img src="https://github.com/xoos0420/udrio/assets/131944211/5adc0991-a825-427f-8ba8-7582563f1284">
+  <img src="">
 </div>
 
 * 빵야빵야
@@ -37,6 +37,7 @@
 
 ## 4. STACKS
 <div align="center">
+  <img src="https://img.shields.io/badge/Java-6DB33F?style=flat&logo=java&logoColor=white"/>
   <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=flat&logo=springboot&logoColor=white"/>
   <img src="https://img.shields.io/badge/visualstudio-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white">
   <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
