@@ -1,14 +1,7 @@
 ## 1. 빵야빵야
 <div align="center">
-  <img src="">
+  <img src="https://github.com/hyeongjin0706/pangyapangya/blob/master/src/main/resources/static/images/main.png">
 </div>
-
-* 빵야빵야
-* 개발 기간 : 2022.05 ~ 2022.06
-* 빵집을 직접 방문하지 않아도 맛집 빵을 먹을수 있는 '빵 전문 플랫폼'
-  * 오로지 빵을 전문으로 하는 빵 특화 사이트
-  * 개인 빵집＆카페 사장님들이 효과적으로 가게 홍보를 함으로써 시장 경쟁력 상승
-  * 거리 제약 없이 유명 맛집 빵을 집에서도 간편히 먹을 수 있음
 
 ## 2. Information Architecture
 <div align="center">
