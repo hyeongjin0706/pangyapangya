@@ -1,0 +1,424 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<html>
+<head>
+    <title>빵 주문 내역</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <style>
+        .headerIcon{
+            width: 40px;
+            display: block;
+            margin: auto;"
+        }
+        .icon.solid:before {
+            font-weight: 100;
+            content: none;
+        }
+
+        .spotlights h5{
+            font-weight: bold;
+            font-size: small;
+        }
+
+        .spotlights p{
+            font-size: small;
+        }
+
+        /* 검색창 */
+        .search {
+            position: relative;
+            text-align: center;
+            width: 400px;
+            margin: 0 auto;
+        }
+        input {
+            width: 100%;
+            border-radius: 20px;
+            border: 1px solid #bbb;
+            margin: 10px 0;
+            padding: 10px 12px;
+        }
+        .fa-search {
+            position: absolute;
+            left: 90%;
+            top: 35%;
+            margin: 0;
+        }
+        form {
+            margin: 0;
+        }
+        #all{display: flex;}
+        .wrapper{width: 75%;}
+        #ad{background: #fff; width: 15%; height: 10px;}
+        #ad img{width: 100%; height: 600px;}
+        #myMainSection{/*display: flex;*/}
+        #myLeftSection{width: 20%; background: #f9efef;}
+        #myRightSection{width: 100%;/* padding: 0 15px 15px 15px;*/}
+        .myPageTitle{background: #F9A825; margin: 0; padding: 7px 7px 7px 15px;}
+        .myPageTitle p{margin: 0; color: #fff;}
+        #allDiv{padding:15px;}
+        #allDiv p{margin: 0; font-size: 0.85em; font-weight: bold; color: #000;}
+        .contentDiv{margin-top: 15px; margin-bottom: 15px;}
+        .contentDiv a{color: #3b3b3b; font-weight: lighter; border: none; font-size: 0.8rem;}
+        .myPageSelectMenu{margin-top: 5px; margin-bottom: 5px;}
+
+
+        .bread_table{
+            float: left; padding: 0px 5px;
+            /*font-size: 13px;*/
+        }
+        table th{
+            /*padding: 10px;*/
+            padding: 0.75em 0.75em 0.75em 0.75em;
+        }
+        table td{
+            background-color: white;
+        }
+        #bread_img{
+            width: 100px;
+            margin-right: 35px;
+            margin-top: 5px;
+        }
+        #price{
+            /*padding: 0 45px;*/
+            font-size: 14px;
+        }
+        table tbody tr:nth-child(2n + 1) {
+            background-color: white;
+        }
+
+        /* #bakeryName, #bakeryTotalPrice{
+             padding: 10px 20px;
+         }*/
+        .bread_title{
+            font-size: 15px;
+        }
+        .bread_name{
+            font-size: 13px;
+        }
+        .breadTable_top{
+            width: 65%;
+            float: left;
+            margin-left: 10px;
+        }
+        .breadTable_bottom{
+            /*float: right;*/
+            /*margin: 35% 10px;*/
+            margin-top: 2.4em;
+        }
+
+        .bread_img{
+            width: 100px;
+            margin-top: 5px;
+            margin-right: 1em;
+        }
+        .bread_cnt, #cnt1, #cnt2, #cnt3, #cnt4, #cnt5{
+            float: left;
+            font-size: 13px;
+        }
+        #bakery{
+            margin: 0 10px 2em 0;
+        }
+        caption{
+            float: left;
+            margin: 10px;
+        }
+        .board_button button{
+            width: 35px;
+            height: 35px;
+            /*text-align: center;*/
+            padding: 0px;
+            margin: 10px;
+            vertical-align: middle;
+        }
+        .board_button{
+            width: 50%;
+            margin: 0 40%;
+        }
+        #explain p{font-size: 0.8em; background: #fbf6f6; height: 57px; padding: 20px 10px;}
+        #title{
+            color: #F9A825;
+            font-size: 1.2em;
+            font-weight: 900;
+        }
+        #entire{
+            margin: 50px auto;
+        }
+        .breadTable_bottom_td{
+            vertical-align: middle;
+        }
+        .date{
+            margin-left: 5px;
+        }
+        .bread_price, .won{
+            float: left;
+        }
+        .pagination{
+            text-align: center;
+        }
+        .bakery_name{
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body class="is-preload" style="padding: 200px">
+<!-- Header -->
+<header id="header" th:include="/main/header::header_body">
+
+</header>
+
+<!-- Wrapper -->
+<div id="all">
+    <div class="wrapper">
+
+        <section id="myLeftSection">
+            <div id="myLeftDiv">
+                <div class="myPageMenu">
+                    <div class="myPageTitle"><p>MY PAGE</p></div>
+                    <div id="allDiv">
+                        <div class="myPageSelect1"><p>주문 내역</p></div>
+                        <div class="contentDiv">
+                            <div class="myPageSelectMenu"><p><a href="/mypage/breadOrderList">빵 결제 내역</a></p></div>
+                            <div class="myPageSelectMenu"><p><a href="/mypage/oneDayClassList">원데이 클래스 신청 내역</a></a></p></div>
+                            <div class="myPageSelectMenu floorDiv"><p><a href="/mypage/testingList">빵 체험단 신청 내역</a></a></p></div>
+                        </div>
+
+                        <div class="myPageSelect1"><p>내 글 보기</p></div>
+                        <div class="contentDiv">
+                            <div class="myPageSelectMenu"><p><a href="/mypage/bread_review" style="text-decoration: underline; color: chocolate;">빵집 리뷰</a></p></div>
+                            <div class="myPageSelectMenu"><p><a href="/mypage/oneDayClass_review">원데이 클래스</a></a></p></div>
+                            <div class="myPageSelectMenu floorDiv"><p><a href="/mypage/testing_review">빵 체험단</a></a></p></div>
+                        </div>
+
+                        <div class="myPageSelect1"><p>내 정보</p></div>
+                        <div class="contentDiv">
+                            <div class="myPageSelectMenu"><p><a href="/mypage/modifyMyInfo">내 정보 수정</a></p></div>
+                            <div class="myPageSelectMenu"><p><a href="#">회원 탈퇴</a></a></p></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- Main -->
+        <section class="main second-main">
+
+            <section id="entire">
+                <header>
+                    <h2 id="title">빵 결제 내역</h2>
+                </header>
+                <p></p>
+
+                <section id="myMainSection">
+                    <section id="myRightSection">
+                        <div id="explain">
+                            <p>이전에 구매한 상품을 확인해보세요!</p>
+                        </div>
+
+
+
+
+
+
+                        <div id="myRightDiv">
+
+                            <table border="1" id="bakery">
+
+                                <tbody>
+                                <!--첫 번째 빵집-->
+                                <tr>
+                                    <td>
+                                        <div class="firstSection">
+                                            <div class="date">2021-11-09</div>
+                                            <div class="bread_table"><img class="bread_img" src="/images/bread1.jpg"></div>
+                                        </div>
+
+                                        <div class="secondSection">
+                                            <div class="breadTable_top">
+                                                <div class="bakery_name">리에땅</div>
+                                                <span class="bread_title"><strong>9無 🌿비건통밀파운드케이크 👉6종</strong></span>
+                                                <br>
+                                                <ul>
+                                                    <li><span class="bread_name">파운드케이크선택 : 흑임자칙피스프레드</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="breadTable_bottom_td">
+                                        <div class="breadTable_bottom">
+                                            <div class="bread_cnt"><span>수량 : </span></div>
+                                            <div class="" id="cnt1"><b>1</b></div>
+                                        </div>
+                                        <br>
+                                        <div class="bread_price price">8,800</div>
+                                        <div class="won">원</div>
+
+
+
+                                    </td>
+                                </tr>
+                                <!--두 번째 빵집-->
+                                <tr>
+                                    <td>
+                                        <div class="firstSection">
+                                            <div class="date">2021-11-07</div>
+                                            <div class="bread_table"><img class="bread_img" src="/images/bread1_kjy.jpg"></div>
+                                        </div>
+
+                                        <div class="secondSection">
+                                            <div class="breadTable_top">
+                                                <div class="bakery_name">봄에온달과점</div>
+                                                <span class="bread_title"><strong>[NO밀가루 칙피파운드] 리얼치즈 비건빵</strong></span>
+                                                <br>
+                                                <ul>
+                                                    <li><span class="bread_name">비건빵 선택 : 오리지널 비건빵</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="breadTable_bottom_td">
+                                        <div class="breadTable_bottom">
+                                            <div class="bread_cnt"><span>수량 : </span></div>
+                                            <div class="" id="cnt2"><b>3</b></div>
+                                        </div>
+                                        <br>
+                                        <div class="bread_price price">12,000</div>
+                                        <div class="won">원</div>
+
+                                    </td>
+                                </tr>
+                                <!--세 번째 빵집-->
+                                <tr>
+                                    <td>
+                                        <div class="firstSection">
+                                            <div class="date">2021-10-07</div>
+                                            <div class="bread_table"><img class="bread_img" src="/images/bread2_kjy.jpg"></div>
+                                        </div>
+
+                                        <div class="secondSection">
+                                            <div class="breadTable_top">
+                                                <div class="bakery_name">핑크브라운</div>
+                                                <span class="bread_title"><strong>🍪꾸덕! 묵직!🍪 Toddle쿠키</strong></span>
+                                                <br>
+                                                <ul>
+                                                    <li><span class="bread_name">쿠키 선택 : 스모어 쿠키</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="breadTable_bottom_td">
+                                        <div class="breadTable_bottom">
+                                            <div class="bread_cnt"><span>수량 : </span></div>
+                                            <div class="" id="cnt3"><b>5</b></div>
+                                        </div>
+                                        <br>
+                                        <div class="bread_price price">18,000</div>
+                                        <div class="won">원</div>
+
+                                    </td>
+                                </tr>
+                                <!--네 번째 빵집-->
+                                <tr>
+                                    <td>
+                                        <div class="firstSection">
+                                            <div class="date">2021-11-07</div>
+                                            <div class="bread_table"><img class="bread_img" src="/images/bread5_kjy.jpg"></div>
+                                        </div>
+
+                                        <div class="secondSection">
+                                            <div class="breadTable_top">
+                                                <div class="bakery_name">디저트단디</div>
+                                                <span class="bread_title"><strong>생일케이크❤레터링 크리스마스케이크</strong></span>
+                                                <br>
+                                                <ul>
+                                                    <li><span class="bread_name">레터링케이크</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="breadTable_bottom_td">
+                                        <div class="breadTable_bottom">
+                                            <div class="bread_cnt"><span>수량 : </span></div>
+                                            <div class="" id="cnt4"><b>1</b></div>
+                                        </div>
+                                        <br>
+                                        <div class="bread_price price">21,000</div>
+                                        <div class="won">원</div>
+
+                                    </td>
+                                </tr>
+                                <!--다섯 번째 빵집-->
+                                <tr>
+                                    <td>
+                                        <div class="firstSection">
+                                            <div class="date">2021-11-02</div>
+                                            <div class="bread_table"><img class="bread_img" src="/images/bread4_kjy.jpg"></div>
+                                        </div>
+
+                                        <div class="secondSection">
+                                            <div class="breadTable_top">
+                                                <div class="bakery_name">다앤하</div>
+                                                <span class="bread_title"><strong>❤두툼묵직❤아낌없이 만든 수제쿠키</strong></span>
+                                                <br>
+                                                <ul>
+                                                    <li><span class="bread_name">쿠키 선택 : 초코듬뿍 못난이쿠키</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="breadTable_bottom_td">
+                                        <div class="breadTable_bottom">
+                                            <div class="bread_cnt"><span>수량 : </span></div>
+                                            <div class="" id="cnt5"><b>1</b></div>
+                                        </div>
+                                        <br>
+                                        <div class="bread_price price">6,000</div>
+                                        <div class="won">원</div>
+
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                            <!--button-->
+                            <ul class="pagination">
+                                <li><span class="disabled">&lt;</span></li>
+                                <li><a href="#" class="page active">1</a></li>
+                                <li><a href="#" class="page">2</a></li>
+                                <li><a href="#" class="page">3</a></li>
+                                <li><span>…</span></li>
+                                <li><a href="#" class="page">8</a></li>
+                                <li><a href="#" class="page">9</a></li>
+                                <li><a href="#" class="page">10</a></li>
+                                <li><a href="#">&gt;</a></li>
+                            </ul>
+
+                        </div>
+                    </section>
+                </section>
+            </section>
+        </section>
+    </div>
+    <div id="ad">
+        <span class="image"><img src="/images/ECdDwLmUIAIAX7k.jpg" alt=""></span>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer id="footer" th:include="/main/footer::footer_body"></footer>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+<script th:replace="/main/header::header_js"></script>
+</body>
+</html>

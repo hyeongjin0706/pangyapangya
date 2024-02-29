@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.pangyapangya.mappers.TestMapper">
+    <select id="read" resultType="TestingVO">
+        <![CDATA[
+            SELECT * FROM
+            (
+            SELECT ROW_NUMBER() OVER(ORDER BY TNO DESC) R, TNO, STARTDATE, ENDDATE , CEOID, TITLE, BREADTYPE, BREADNAME, PEOPLE, DESCRIPTION, TESTINGPHOTO, SHOPNAME, REGDATE, STATUS FROM TBL_TESTING
+            )
+            WHERE R<=20 AND STATUS = 0
+        ]]>
+    </select>
+
+    <select id="addData" resultType="TestingVO">
+        <![CDATA[
+            SELECT TNO, STARTDATE, ENDDATE, CEOID, TITLE, BREADTYPE, BREADNAME, PEOPLE, DESCRIPTION, TESTINGPHOTO, SHOPNAME, REGDATE, STATUS FROM
+            (
+            SELECT ROW_NUMBER() OVER(ORDER BY TNO DESC) R, TNO, STARTDATE, ENDDATE, CEOID, TITLE, BREADTYPE, BREADNAME, PEOPLE, DESCRIPTION, TESTINGPHOTO, SHOPNAME, REGDATE, STATUS FROM TBL_TESTING
+            )
+            WHERE R > #{temp} AND R <= #{temp}+20 AND STATUS = 0
+        ]]>
+    </select>
+
+    <select id="getTotal" resultType="_int">
+        SELECT COUNT(TNO) FROM TBL_TESTING
+    </select>
+
+    <select id="getRead" resultType="TestingVO">
+        SELECT * FROM TBL_TESTING WHERE TNO = #{tno}
+    </select>
+
+    <select id="getReadImgs" resultType="TestingImgVO">
+        SELECT * FROM TBL_TESTING_IMG WHERE TNO = #{tno}
+    </select>
+
+    <insert id="addTestingRequest">
+        INSERT INTO TBL_TESTING_REQUEST
+        (REQUESTNUM, USERID, TNO, STATUS)
+        VALUES(SEQREQUESTNUM.NEXTVAL, #{userId}, #{tno}, 0)
+    </insert>
+
+    <select id="getEndList" resultType="TestingVO">
+        SELECT * FROM TBL_TESTING
+        WHERE TO_CHAR(ENDDATE, 'YYYY/MM/DD') = TO_CHAR(SYSDATE - 1, 'YYYY/MM/DD')
+    </select>
+
+    <select id="getRequestCnt" resultType="_int">
+        SELECT COUNT(REQUESTNUM) FROM TBL_TESTING_REQUEST
+        WHERE TNO = #{tno}
+    </select>
+
+    <update id="updateAllWinning">
+        UPDATE TBL_TESTING_REQUEST
+        SET WINNINGDATAE= SYSDATE ,STATUS = 1
+        WHERE TNO = #{tno}
+    </update>
+
+    <update id="updateWinning">
+        UPDATE TBL_TESTING_REQUEST
+        SET WINNINGDATAE= SYSDATE ,STATUS = 1
+        WHERE TNO = #{tno} AND USERID = #{userId}
+    </update>
+
+
+    <update id="updateFail">
+        UPDATE TBL_TESTING_REQUEST
+        SET STATUS = -1
+        WHERE TNO = #{tno} AND USERID = #{userId}
+    </update>
+
+
+    <update id="endTest">
+        UPDATE TBL_TESTING
+        SET STATUS = -1
+        WHERE TNO = #{tno}
+    </update>
+
+
+    <update id="resetUserApplyCnt">
+        UPDATE TBL_USER
+        SET applyCnt = 0
+    </update>
+
+    <update id="requestUser">
+        UPDATE TBL_USER
+        SET applyCnt = 1
+        WHERE USERID = #{userId}
+    </update>
+
+    <select id="getRequestUser" resultType="TestingRequestVO">
+        SELECT * FROM TBL_TESTING_REQUEST
+        WHERE TNO = #{tno}
+    </select>
+
+
+    <select id="getReviewBoardList" resultType="TestingReviewBoardVO">
+        <![CDATA[
+            SELECT * FROM
+            (
+            SELECT ROW_NUMBER() OVER(ORDER BY TNO DESC) R, TNO, CEOID, TITLE, BREADTYPE, BREADNAME, DESCRIPTION, TESTINGPHOTO, SHOPNAME, REVIEWCNT FROM TBL_TESTING_REVIEW_BOARD
+            )
+            WHERE R<=20
+        ]]>
+    </select>
+
+
+    <select id="addReviewBoard" resultType="TestingReviewBoardVO">
+        <![CDATA[
+            SELECT TNO, CEOID, TITLE, BREADTYPE, BREADNAME, DESCRIPTION, TESTINGPHOTO, SHOPNAME, REVIEWCNT FROM
+            (
+            SELECT ROW_NUMBER() OVER(ORDER BY TNO DESC) R, TNO, CEOID, TITLE, BREADTYPE, BREADNAME, DESCRIPTION, TESTINGPHOTO, SHOPNAME, REVIEWCNT FROM TBL_TESTING_REVIEW_BOARD
+            )
+            WHERE R > #{temp} AND R <= #{temp}+20
+        ]]>
+    </select>
+
+    <select id="getReviewBoardTotal" resultType="_int">
+        SELECT COUNT(TNO) FROM TBL_TESTING_REVIEW_BOARD
+    </select>
+
+    <select id="getWinList" resultType="TestingRequestVO">
+        SELECT * FROM TBL_TESTING_REQUEST ttr
+        WHERE TO_CHAR(WINNINGDATAE , 'YYYY/MM/DD') = TO_CHAR(SYSDATE, 'YYYY/MM/DD')
+    </select>
+
+    <select id="getUserNamae" resultType="string">
+        SELECT USERNAME FROM TBL_USER
+        WHERE USERID = #{userId}
+    </select>
+
+    <select id="getUserTel" resultType="string">
+        SELECT USERPHONENUM FROM TBL_USER
+        WHERE USERID = #{userId}
+    </select>
+
+    <select id="getBreadName" resultType="string">
+        SELECT BREADNAME FROM TBL_TESTING tt
+        WHERE TNO = #{tno}
+    </select>
+
+    <select id="getShopName" resultType="string">
+        SELECT SHOPNAME FROM TBL_TESTING tt
+        WHERE TNO = #{tno}
+    </select>
+
+    <select id="checkRe" resultType="_int">
+        SELECT COUNT(REQUESTNUM) FROM TBL_TESTING_REQUEST
+        WHERE USERID = #{userId} AND TNO = #{tno}
+    </select>
+
+    <select id="checkApplyCnt" resultType="_int">
+        SELECT APPLYCNT FROM TBL_USER
+        WHERE USERID = #{userId}
+    </select>
+
+
+
+
+
+    <!-- 예진님 -->
+    <select id="mainTest" resultType="TestingVO">
+        <![CDATA[
+            SELECT TNO, STARTDATE, ENDDATE, CEOID, TITLE, BREADTYPE, BREADNAME, PEOPLE, DESCRIPTION, TESTINGPHOTO, SHOPNAME, REGDATE, STATUS FROM
+            (
+            SELECT ROW_NUMBER() OVER(ORDER BY TNO DESC) R, TNO, STARTDATE, ENDDATE, CEOID, TITLE, BREADTYPE, BREADNAME, PEOPLE, DESCRIPTION, TESTINGPHOTO, SHOPNAME, REGDATE, STATUS FROM TBL_TESTING
+            )
+            WHERE R<=3 AND STATUS = 0
+        ]]>
+    </select>
+
+    <select id="mainReview" resultType="TestingReviewBoardVO">
+        <![CDATA[
+            SELECT TNO, CEOID, TITLE, BREADTYPE, BREADNAME, DESCRIPTION, TESTINGPHOTO, SHOPNAME, REVIEWCNT FROM
+            (
+            SELECT ROW_NUMBER() OVER(ORDER BY TNO DESC) R, TNO, CEOID, TITLE, BREADTYPE, BREADNAME, DESCRIPTION, TESTINGPHOTO, SHOPNAME, REVIEWCNT FROM TBL_TESTING_REVIEW_BOARD
+            )
+            WHERE R<=3
+        ]]>
+    </select>
+</mapper>

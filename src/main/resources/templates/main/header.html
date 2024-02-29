@@ -1,0 +1,228 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<html>
+<head>
+	<title>빵야빵야(屋)</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<link rel="stylesheet" href="/css/main.css" />
+	<style th:fragment="header_style">
+		.headerIcon{
+			width: 40px;
+			display: block;
+			margin: auto;"
+		}
+		.icon.solid:before {
+			font-weight: 100;
+			content: none;
+		}
+
+		.spotlights h5{
+			font-weight: bold;
+			font-size: small;
+		}
+
+		.spotlights p{
+			font-size: small;
+		}
+
+		/* 검색창 */
+		.search {
+			position: relative;
+			text-align: center;
+			width: 400px;
+			margin: 0 auto;
+		}
+		input {
+			width: 100%;
+			border-radius: 20px;
+			border: 1px solid #bbb;
+			margin: 10px 0;
+			padding: 10px 12px;
+		}
+		.fa-search {
+			position: absolute;
+			left: 90%;
+			top: 35%;
+			margin: 0;
+		}
+		form {
+			margin: 0;
+		}
+
+	</style>
+</head>
+<body class="is-preload" style="padding: 10em 200px 0 200px;">
+
+<!-- Header -->
+<header id="header" th:fragment="header_body">
+
+	<!-- Logo -->
+	<span class="logo">
+		<a href="/main/mainPage"><img src="/images/mainLogo2.png" alt="myPage" style="width: 100px;margin-top: 1.3em;"/></a>
+		<span></span>
+	</span>
+
+	<!-- Nav -->
+	<nav id="nav">
+		<ul>
+			<li><div class="changeColor"><a href="/main/breadList">오늘의 빵</a></div></li>
+			<li><div class="changeColor"><a href="/class/classMain">원데이 클래스</a></div></li>
+			<li>
+				<div class="changeColor"><a href="/test/list">빵 체험단</a></div>
+				<ul>
+					<li><a href="/test/list">빵 체험단 신청하기</a></li>
+					<li><a href="/test/review">빵 체험단 리뷰</a></li>
+				</ul>
+			</li>
+			<!-- 검색창 -->
+			<form action="/main/breadList" id="searchForm">
+				<div class="search">
+					<a href="#" id="iconSearch"><i class="fas fa-search"></i></a>
+					<input type="text" id="keyword" name="keyword" placeholder="먹고 싶은 빵 종류를 검색 해 보세요" maxlength="17" style="background-color: wheat;border-radius: 10px;color: darkgray">
+
+				</div>
+				<input type="hidden" class="box" value="검색">
+			</form>
+			<!-- 비회원일 경우 -->
+			<li th:if="${session.sessionU == null && session.sessionC == null}">
+				<a href="#" class="icon solid fa-angle-down"><img src="/images/iconPerson.png" alt="myPage" class="headerIcon"/></a>
+				<ul>
+					<li><a href="/user/login">로그인</a></li>
+					<li><a href="/user/join">회원가입</a></li>
+				</ul>
+			</li>
+			<!-- 일반회원일 경우 -->
+			<li th:if="${session.sessionU != null}">
+				<input type="hidden" id="sessionU" th:value="${session['sessionU']}" />
+				<a href="#" class="icon solid fa-angle-down"><img src="/images/iconPerson.png" alt="myPage" class="headerIcon"/></a>
+				<ul>
+					<li><a href="/mypage/breadOrderList">주문 내역</a></li>
+					<li><a href="/mypage/myWriting_new">내 글보기</a></li>
+					<li><a href=" /mypage/modifyMyInfo">내 정보관리</a></li>
+					<li><a onclick="kakaoLogout()" th:href="@{/user/logout}">로그아웃</a></li>
+				</ul>
+			</li>
+			<!-- 사장님일 경우 -->
+			<li th:if="${session.sessionC != null}">
+				<input type="hidden" id="sessionC" th:value="${session['sessionC']}" />
+				<a href="#" class="icon solid fa-angle-down"><img src="/images/iconPerson.png" alt="myPage" class="headerIcon"/></a>
+				<ul>
+					<li>
+						<a href="#">글 등록하기</a>
+						<ul>
+							<li><a href="/myPageCeo/bakery">빵집 소개</a></li>
+							<li><a href="/myPageCeo/oneDay">원데이 클래스</a></li>
+							<li><a href="/myPageCeo/exp">빵 체험단</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">내 글보기</a>
+						<ul>
+							<li><a href="/myPageCeo/bakeryRe">빵집 소개</a></li>
+							<li><a href="/myPageCeo/oneDayRe">원데이 클래스</a></li>
+							<li><a href="/myPageCeo/expRe">빵 체험단</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">내 정보관리</a>
+						<ul>
+							<li><a href="/myPageCeo/edit">회원정보 수정</a></li>
+							<li><a href="/myPageCeo/delete">회원 탈퇴</a></li>
+						</ul>
+					</li>
+					<li><a th:href="@{/user/logout}">로그아웃</a></li>
+				</ul>
+			</li>
+
+			<li style="margin-left: -1em;">
+				<a href="/mypage/cart"><img src="/images/iconCart.png" alt="cart" class="headerIcon"/></a>
+			</li>
+		</ul>
+	</nav>
+
+</header>
+
+
+<!-- Scripts -->
+<script src="https://kit.fontawesome.com/8eb5905426.js" crossorigin="anonymous"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+<script type="text/javascript" th:fragment="header_js">
+	let searchForm = $("#searchForm");	// 검색창
+
+	// 메뉴 색상 변경
+	let div= $("#nav").find(".changeColor");
+	console.log(div);
+
+	div.each(function (index, element) {
+		console.log(index, element);
+		$(element).mouseleave(function(){
+			$(element).css("color", "white");
+		})
+		$(element).mouseover(function(){
+			$(element).css("color", "black");
+		})
+	})
+
+	// 검색창 공백막기
+	$("form[name='searchForm']").on("keydown", function (e) {
+		if(e.keyCode == 13){
+			console.log($("#keyword").val())
+			if(!$("#keyword").val()){
+				alert("빵 종류를 입력 해 주세요");
+				return false;
+			}
+			searchForm.submit();
+		}
+	})
+
+	// 돋보기 눌렀을때 공백 막기
+	$('.fas').on("click", function () {
+		if(!$("#keyword").val()){
+			alert("빵 종류를 입력 해 주세요");
+			return false;
+		}
+		searchForm.submit();
+	})
+
+	// 세션값 확인
+	if($('#sessionU').val() != null){
+		console.log("session: " + $('#sessionU').val());
+	}else if ($('#sessionC').val() != null){
+		console.log("session: " + $('#sessionC').val());
+	}
+
+/*
+
+	Kakao.init('2465241f2a949966552234d75ef14dee'); //발급받은 키 중 javascript키를 사용해준다.
+	console.log("sdk초기화여부판단" + Kakao.isInitialized()); // sdk초기화여부판단
+	// 카카오톡 로그아웃
+	function kakaoLogout() {
+		if (Kakao.Auth.getAccessToken()) {
+			Kakao.API.request({
+				url: '/v1/user/unlink',
+				success: function (response) {
+					alert("로그아웃 성공");
+					console.log(response)
+				},
+				fail: function (error) {
+					console.log(error)
+				},
+			})
+			Kakao.Auth.setAccessToken(undefined)
+		}
+	}
+*/
+
+</script>
+</body>
+</html>
