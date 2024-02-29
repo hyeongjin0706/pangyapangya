@@ -5,30 +5,20 @@
 
 ## 2. Information Architecture
 <div align="center">
-  <img width="80%" height="60%" alt="UDiro logo" src="https://github.com/hyeongjin0706/pangyapangya/blob/master/src/main/resources/static/images/IA.png"/>
+  <img alt="" src="https://github.com/hyeongjin0706/pangyapangya/blob/master/src/main/resources/static/images/IA.png"/>
 </div>
 
 ## 3. Main Service
 <div align="center">
-  <img width="80%" height="60%" src="https://github.com/hyeongjin0706/pangyapangya/assets/92289971/d9c34e0a-d203-413c-ad1b-24683d13aea3"/>
+  <img src="https://github.com/hyeongjin0706/pangyapangya/assets/92289971/4c088a96-4e4c-4c76-bdd9-ec0ddb5b59f1"/>
 </div>
 
-* 서울시 실시간 도시데이터 API에서 데이터 파싱 후 값을 저장
-* 서울시 혼잡도 지역을 기반으로 움직이는 원을 생성
-* 화장실 및 주차장 등의 도시 편의시설 표시
-* 검색기능 구현을 통한 원할한 정보 취득 가능
-<br>
-
+## 4. Screen
 <div align="center">
-  <img width="80%" height="60%" src="https://github.com/xoos0420/udrio/assets/131944211/d4f33e97-38df-4141-87a4-c8059853e460"/>
+  <img width="80%" height="60%" alt="UDiro logo" src="https://github.com/hyeongjin0706/pangyapangya/blob/master/src/main/resources/static/images/IA.png"/>
 </div>
 
-* 서울시 공공데이터의 문화, 행사, 축제 데이터 API를 이용하여 DB에 저장
-* 저장된 DB을 통해 해당 주소로 데이터를 html, css, js를 통해 웹사이트 구조와 함께 반환
-* 검색기능 구현을 통한 원할한 정보 취득 가능
-<br>
-
-## 4. STACKS
+## 5. STACKS
 <div align="center">
   <img src="https://img.shields.io/badge/java-6DB33F?style=for-the-badge&logo=java&logoColor=white"/>
   <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"/>
