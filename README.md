@@ -14,12 +14,37 @@
 </div>
 
 ## 4. Screen
+
+### 메인 페이지
 <div align="center">
-  * Main
   <img src="https://github.com/hyeongjin0706/pangyapangya/assets/92289971/419307b2-eeb6-415b-8498-83f27f567edf"/>
-  <br>
-  
 </div>
+
+### 빵집 페이지
+<div align="center">
+  <img src="https://github.com/hyeongjin0706/pangyapangya/assets/92289971/ef8ed1a5-6926-4e68-9bb1-f3b2bdbc267d"/>
+</div>
+
+### 원데이 클래스 페이지
+<div align="center">
+  <img src="https://github.com/hyeongjin0706/pangyapangya/assets/92289971/ad98181b-8441-4024-8bca-4e4af5e1be76"/>
+</div>
+
+### 빵 체험단 페이지
+<div align="center">
+  <img src="https://github.com/hyeongjin0706/pangyapangya/assets/92289971/f6d33fcf-c0a7-4caa-98b6-27bfb67465b3"/>
+</div>
+
+### 회원 마이 페이지
+<div align="center">
+  <img src="https://github.com/hyeongjin0706/pangyapangya/assets/92289971/ff19df8e-3e15-425f-b3d7-67064e4c11e6"/>
+</div>
+
+### CEO 마이 페이지
+<div align="center">
+  <img src="https://github.com/hyeongjin0706/pangyapangya/assets/92289971/b11d8f60-7b0c-4dff-8737-ccffdbc89cac"/>
+</div>
+
 
 ## 5. STACKS
 <div align="center">
