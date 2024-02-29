@@ -9,7 +9,8 @@
 </div>
 
 ## 3. Main Service
-<div align="center">
+<div align="center">![image](https://github.com/hyeongjin0706/pangyapangya/assets/92289971/d9c34e0a-d203-413c-ad1b-24683d13aea3)
+
   <img width="80%" height="60%" src="https://github.com/xoos0420/udrio/assets/131944211/3fc258f2-e9ed-4dc6-904d-1ed890642c85"/>
 </div>
 
