@@ -37,7 +37,7 @@
 
 ## 4. STACKS
 <div align="center">
-  <img src="https://img.shields.io/badge/Java-6DB33F?style=flat&logo=java&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Java-6DB33F?style=flat&logo=Java&logoColor=white"/>
   <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=flat&logo=springboot&logoColor=white"/>
   <img src="https://img.shields.io/badge/visualstudio-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white">
   <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
