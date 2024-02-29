@@ -15,7 +15,10 @@
 
 ## 4. Screen
 <div align="center">
-  <img width="80%" height="60%" alt="UDiro logo" src="https://github.com/hyeongjin0706/pangyapangya/blob/master/src/main/resources/static/images/IA.png"/>
+  * Main
+  <img src="https://github.com/hyeongjin0706/pangyapangya/assets/92289971/419307b2-eeb6-415b-8498-83f27f567edf"/>
+  <br>
+  
 </div>
 
 ## 5. STACKS
