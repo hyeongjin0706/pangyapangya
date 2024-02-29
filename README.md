@@ -1,9 +1,9 @@
-## 1. pangyapangya
+## 1. 빵야빵야
 <div align="center">
   <img src="https://github.com/xoos0420/udrio/assets/131944211/5adc0991-a825-427f-8ba8-7582563f1284">
 </div>
 
-* pangyapangya
+* 빵야빵야
 * 개발 기간 : 2022.05 ~ 2022.06
 * 빵집을 직접 방문하지 않아도 맛집 빵을 먹을수 있는 '빵 전문 플랫폼'
   * 오로지 빵을 전문으로 하는 빵 특화 사이트
